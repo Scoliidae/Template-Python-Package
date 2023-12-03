@@ -17,7 +17,7 @@ from os.path import \
 class Lib:
     """Stores the core boiler-plate functions needed for the application to run"""
     class Gui:
-        """Controls the graphical user interface that the end-user is intended to interect with to control the application"""
+        """Controls the graphical user interface that the end-user is intended to interact with to control the application"""
     class Logger:
         """Event logger for the application in-case of crashes or need of filing bug reports to replicate end-user's taken actions within the application"""
         class Default:
@@ -30,7 +30,7 @@ class Lib:
         @classmethod
         def normalize_level(cls, new_level:str|int)-> dict:
             """
-            Parse a given level to recieve a normalized output
+            Parse a given level to receive a normalized output
             
             ---
 
@@ -125,12 +125,12 @@ class Lib:
         def __pick_handler(self, output_handler:Literal["console","file"]="file")->str:
             return "console" if output_handler=="console" and self.level.lower()=="debug" else "file"
         #endregion WIP
-    class Mathapedia:
+    class Mathopedia:
         """
-        Math as taught in school if taught in step to an elementary schooler
+        Math as taught in school if taught in step to elementary schoolers
         
         This is as many computational forms of math that I (St0rm) could work out by myself from reading online formulas as well as remember from school.
-        The point of this module albiet slower than the native C-based counterpart already implemented is to retain higher precision with longer values.
+        The point of this module albeit slower than the native C-based counterpart already implemented is to retain higher precision with longer values.
 
         If an answer exceeds precision point, value will be compressed for memory reasons.
         If value would result in an infinite number (calculates further than retained precision), value is compressed to the precision point and suffixed with "e+/-\u221E"
@@ -151,7 +151,7 @@ class Lib:
                 case str():
                     value= value.replace("\u0020"," ").replace(" ","")
 
-                    #region validate str as numberical format syntax
+                    #region validate str as numerical format syntax
                     invalid_entry_format_err:str= "Input is not a valid number! Please check that value, has been handled properly before parsing again."
                     if _regex_search("[^0-9.-]",value) is not None:
                         raise ValueError(invalid_entry_format_err)
@@ -159,7 +159,7 @@ class Lib:
                         raise ValueError(invalid_entry_format_err)
                     elif value.count("-")!=0 and not value.startswith("-") or value.count("-")>1:
                         raise ValueError(invalid_entry_format_err)
-                    #endregion validate str as numberical format syntax
+                    #endregion validate str as numerical format syntax
 
                     return _inf if int(value)>=_sys_max_int else _sys_max_int
                 case int():
@@ -171,7 +171,7 @@ class Lib:
                 case _:
                     raise TypeError(f"value must be of type str | int | float not {type(value)}")
         def isNegative(value:str|int|float)-> bool:
-            """Returns if value is a nagative value"""
+            """Returns if value is a negative value"""
             value= float(value) if not isinstance(value,float) else value
             return True if value<0 else False
 
@@ -209,7 +209,7 @@ class Lib:
             elif not isinstance(retain_precision,(str,int,float)):
                 raise TypeError(f"Please ensure retain_precision is of type str, int or float not {type(retain_precision)}")
             #endregion input not right type
-            #region format incomming input
+            #region format incoming input
             value_a= str(value_a) if not isinstance(value_a,str) else value_a.strip()
             value_b= str(value_b) if not isinstance(value_b,str) else value_b.strip()
 
@@ -240,11 +240,11 @@ class Lib:
                 case float()|str():
                     if isinstance(retain_precision,float):
                         retain_precision=int(retain_precision)
-                    elif retain_precision.strip()==Lib.Mathapedia.lemniscate_unicode_str:
+                    elif retain_precision.strip()==Lib.Mathopedia.lemniscate_unicode_str:
                         retain_precision=_sys_max_int
             if retain_precision<1:
                 retain_precision=1
-            #endregion format incomming input
+            #endregion format incoming input
 
             #region Nothing added
             if float(value_a)==0.0:
@@ -254,8 +254,8 @@ class Lib:
             #endregion nothing added
             
             #region store if value is negative
-            value_a_isnegative= Lib.Mathapedia.isNegative(value_a)
-            value_b_isnegative= Lib.Mathapedia.isNegative(value_b)
+            value_a_isnegative= Lib.Mathopedia.isNegative(value_a)
+            value_b_isnegative= Lib.Mathopedia.isNegative(value_b)
             #endregion store if value is negative
 
             value_a=value_a[1:] if value_a.startswith(("+","-")) else value_a
@@ -309,7 +309,7 @@ class Lib:
                     # this means make sure the positive value is equated first
                     highest_value= f"{value_a_int}.{value_a_float}" if not value_a_isnegative else f"{value_b_int}.{value_b_float}"
                     lowest_value= f"-{value_a_int}.{value_a_float}" if value_a_isnegative else f"-{value_b_int}.{value_b_float}"
-                    full_answer= Lib.Mathapedia.subtract(highest_value, lowest_value[1:])
+                    full_answer= Lib.Mathopedia.subtract(highest_value, lowest_value[1:])
                     
                     print(
                         highest_value,
@@ -380,7 +380,7 @@ class Lib:
             elif not isinstance(retain_precision,(str,int,float)):
                 raise TypeError(f"Please ensure retain_precision is of type str, int or float not {type(retain_precision)}")
             #endregion input not right type
-            #region format incomming input
+            #region format incoming input
             value_a= str(value_a) if not isinstance(value_a,str) else value_a.strip()
             value_b= str(value_b) if not isinstance(value_b,str) else value_b.strip()
 
@@ -411,11 +411,11 @@ class Lib:
                 case float()|str():
                     if isinstance(retain_precision,float):
                         retain_precision=int(retain_precision)
-                    elif retain_precision.strip()==Lib.Mathapedia.lemniscate_unicode_str:
+                    elif retain_precision.strip()==Lib.Mathopedia.lemniscate_unicode_str:
                         retain_precision=_sys_max_int
             if retain_precision<1:
                 retain_precision=1
-            #endregion format incomming input
+            #endregion format incoming input
 
             #region Nothing subtracted
             if float(value_a)==0.0:
@@ -425,8 +425,8 @@ class Lib:
             #endregion nothing subtracted
             
             #region store if value is negative
-            value_a_isnegative= Lib.Mathapedia.isNegative(value_a)
-            value_b_isnegative= Lib.Mathapedia.isNegative(value_b)
+            value_a_isnegative= Lib.Mathopedia.isNegative(value_a)
+            value_b_isnegative= Lib.Mathopedia.isNegative(value_b)
             #endregion store if value is negative
 
             value_a=value_a[1:] if value_a.startswith(("+","-")) else value_a
@@ -477,12 +477,12 @@ class Lib:
             return
         def cosine():
             return
-        def pythagorian_theorem():
+        def pythagorean_theorem():
             return
 
         def length():
             return
-        def perimeter(dimsions:zip):
+        def perimeter(dimensions:zip):
             return
         def surface_area():
             return
@@ -673,7 +673,7 @@ class Lib:
                         11:"November",
                         12:"December"
                     }
-                    ending_pronounciation={
+                    ending_pronunciation={
                         1:"first",
                         2:"second",
                         3:"third",
@@ -682,7 +682,7 @@ class Lib:
                         6:"sixth",
                         7:"seventh",
                         8:"eighth",
-                        9:"nineth",
+                        9:"ninth",
                         10:"tenth",
                         11:"eleventh",
                         12:"twelfth",
@@ -699,9 +699,9 @@ class Lib:
                     #endregion value aliasing
                     # region associate day number with written form
                     if day<=20 or day==30:
-                        day= ending_pronounciation[day]
+                        day= ending_pronunciation[day]
                     elif 20<day<30:
-                        day=f"twenty {ending_pronounciation[day-20]}"
+                        day=f"twenty {ending_pronunciation[day-20]}"
                     else:
                         day="thirty first"
                     #endregion associate day number with written form
